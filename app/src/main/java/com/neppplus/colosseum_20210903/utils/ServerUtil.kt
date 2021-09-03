@@ -69,6 +69,12 @@ class ServerUtil {
 
                     Log.d("서버응답본문", jsonObj.toString())
 
+
+//                    code값 추출 연습. -> 화면에서 분석해서, 토스트를 띄우는 등의 UI 처리.
+//                    val code = jsonObj.getInt("code")
+//
+//                    Log.d("코드값", code.toString())
+
                 }
 
             })
