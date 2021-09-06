@@ -13,9 +13,12 @@
         android:theme="@style/Theme.Colosseum_20210903"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ViewTopicDetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".SplashActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:exported="true" >
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,8 +33,7 @@
             android:exported="true" />
         <activity
             android:name=".SignInActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>
