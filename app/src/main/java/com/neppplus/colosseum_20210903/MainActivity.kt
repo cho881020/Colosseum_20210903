@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.neppplus.colosseum_20210903.adapters.TopicAdapter
 import com.neppplus.colosseum_20210903.datas.TopicData
 import com.neppplus.colosseum_20210903.utils.ServerUtil
@@ -72,14 +73,25 @@ class MainActivity : BaseActivity() {
                     tempTopicData.title = topicObj.getString("title")
                     tempTopicData.imageURL = topicObj.getString("img_url")
 
+
 //                    mTopicList에 하나씩 추가. => 어댑터의 목록 구성 변수에 변화.
                     mTopicList.add(tempTopicData)
 
                 }
 
+
+//                로그인한 사용자 닉네임 가져오기
+
+                val userObj = dataObj.getJSONObject("user")
+                val nickname = userObj.getString("nick_name")
+
+
 //                목록의 변화 -> 리스트뷰가 인지. -> 새로고침 공지. -> 리스트뷰 변경 -> 백그라운드에서 UI 변경
                 runOnUiThread {
                     mTopicAdapter.notifyDataSetChanged()
+
+                    Toast.makeText(mContext, "${nickname}님 환영합니다.!", Toast.LENGTH_SHORT).show()
+
                 }
 
 
