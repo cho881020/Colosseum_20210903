@@ -2,7 +2,9 @@ package com.neppplus.colosseum_20210903
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import com.neppplus.colosseum_20210903.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import org.json.JSONObject
@@ -16,6 +18,20 @@ class SignUpActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+//        이메일 입력칸의 내용 변경 감지.
+
+        emailEdt.addTextChangedListener {
+
+//            it 변수를 활용 : 입력된 내용 파악.
+            Log.d("이메일입력변경", it.toString())
+
+//            실제 코딩 : 변경되기만 하면 => 검사 결과 문구를 "중복 검사를 해주세요." 로 변경.
+            checkEmailResultTxt.text = "중복 검사를 해주세요."
+
+
+        }
+
 
         checkEmailBtn.setOnClickListener {
 
