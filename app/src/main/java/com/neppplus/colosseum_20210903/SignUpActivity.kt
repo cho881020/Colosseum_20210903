@@ -40,6 +40,14 @@ class SignUpActivity : BaseActivity() {
 
                     if (code == 200) {
 
+//                        가입에 성공했습니다. 토스트
+//                        이전 화면으로 복귀
+
+                        runOnUiThread {
+                            Toast.makeText(mContext, "가입에 성공했습니다.", Toast.LENGTH_SHORT).show()
+                            finish()
+                        }
+
                     }
                     else {
                         val message = jsonObj.getString("message")
