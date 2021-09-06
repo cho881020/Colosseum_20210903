@@ -23,7 +23,30 @@ class SignUpActivity : BaseActivity() {
             val inputEmail = emailEdt.text.toString()
 
 //            2. 서버에 이메일 중복확인 요청 -> 응답에 따라, 결과 텍스트뷰의 문구 수정.
-            ServerUtil.getRequestDuplCheck("EMAIL", inputEmail, null)
+            ServerUtil.getRequestDuplCheck("EMAIL", inputEmail, object : ServerUtil.JsonResponseHandler {
+
+                override fun onResponse(jsonObj: JSONObject) {
+
+                    val code = jsonObj.getInt("code")
+
+                    runOnUiThread {
+                        if (code == 200) {
+
+//                        문구 변경 - 이메일 중복확인 결과 문구로 반영
+                            checkEmailResultTxt.text = "사용해도 좋은 이메일입니다."
+                        }
+                        else {
+//                        문구 변경 - 이메일 중복확인 결과 문구로 반영
+                            checkEmailResultTxt.text = "중복된 이메일입니다. 다른걸로 입력해주세요."
+                        }
+                    }
+
+
+
+
+                }
+
+            })
 
         }
 
