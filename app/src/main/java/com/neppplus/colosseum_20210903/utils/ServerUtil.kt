@@ -2,6 +2,7 @@ package com.neppplus.colosseum_20210903.utils
 
 import android.util.Log
 import okhttp3.*
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.json.JSONObject
 import java.io.IOException
 
@@ -129,6 +130,25 @@ class ServerUtil {
 
         }
 
+//        이메일/닉네임 중복 확인 함수.
+
+        fun getRequestDuplCheck(type: String, value: String, handler: JsonResponseHandler?) {
+
+//            GET메쏘드로 서버에 요청. -> URL을 적을때, (query)파라미터들도 같이 적어줘야 한다.
+//            어디로 + 무엇을들고 => 한번에 작성됨.
+
+//            호스트주소/엔드포인트 기반으로, 파라미터들을 쉽게 첨부할 수 있도록 도와주는 변수.
+            val url = "${HOST_URL}/user_check".toHttpUrlOrNull()!!.newBuilder()
+//            기본 url뒤에, 파라미터들 첨부.
+            url.addEncodedQueryParameter("type", type)
+            url.addEncodedQueryParameter("value", value)
+
+            val urlString = url.toString()
+
+            Log.d("완성된URL", urlString)
+
+
+        }
 
     }
 

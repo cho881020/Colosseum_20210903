@@ -17,6 +17,16 @@ class SignUpActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        checkEmailBtn.setOnClickListener {
+
+//            1. 입력한 이메일을 받아서
+            val inputEmail = emailEdt.text.toString()
+
+//            2. 서버에 이메일 중복확인 요청 -> 응답에 따라, 결과 텍스트뷰의 문구 수정.
+            ServerUtil.getRequestDuplCheck("EMAIL", inputEmail, null)
+
+        }
+
         signUpBtn.setOnClickListener {
 
 //            1. 입력 한 값 받아서
