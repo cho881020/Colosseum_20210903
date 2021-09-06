@@ -2,7 +2,9 @@ package com.neppplus.colosseum_20210903
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import com.neppplus.colosseum_20210903.utils.ContextUtil
 import com.neppplus.colosseum_20210903.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import org.json.JSONObject
@@ -17,6 +19,17 @@ class SignInActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+//        자동로그인 체크박스의 값이 바뀔때마다 저장.
+        autoLoginCheckBox.setOnCheckedChangeListener { compoundButton, isCheked ->
+
+//            Log.d("체크여부", isCheked.toString())
+
+//            자동로그인 여부인 isChecked 에 들어오는 값을 저장.
+            ContextUtil.setAutoLogin(mContext, isCheked)
+
+        }
+
 
         signUpBtn.setOnClickListener {
             val myIntent = Intent(mContext, SignUpActivity::class.java)
@@ -110,6 +123,10 @@ class SignInActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+//        저장된 자동로그인 여부를 받아내서 -> 자동로그인 체크박스에 반영.
+        autoLoginCheckBox.isChecked = ContextUtil.getAutoLogin(mContext)
+
 
     }
 
