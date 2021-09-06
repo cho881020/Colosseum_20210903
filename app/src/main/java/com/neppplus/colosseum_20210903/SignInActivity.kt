@@ -81,6 +81,16 @@ class SignInActivity : BaseActivity() {
 //                            Toast.makeText(mContext, "${nickname}님 환영합니다!", Toast.LENGTH_SHORT).show()
 //                        }
 
+
+//                        서버가 내려주는 토큰값을 기기에 저장. (ContextUtil 활용)
+//                        data {  } 내부에 토큰값이 내려옴.
+
+                        val dataObj = jsonObj.getJSONObject("data")
+                        val token = dataObj.getString("token")
+
+                        ContextUtil.setToken(mContext, token)
+
+
 //                        메인화면으로 이동 + 로그인화면 종료
                         val myIntent = Intent(mContext, MainActivity::class.java)
                         startActivity(myIntent)
