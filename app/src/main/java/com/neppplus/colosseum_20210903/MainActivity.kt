@@ -52,6 +52,18 @@ class MainActivity : BaseActivity() {
 //                        임시 시나리오 :  로그인한 사람의 닉네임을 토스트로
 //                         "~~님, 환영합니다!"
 
+//                        "data" 이름의 {  }를 변수로 담자.
+                        val dataObj = jsonObj.getJSONObject("data")
+
+//                        data: { } 안에서,   user:{ } 를 변수에 담자.
+                        val userObj = dataObj.getJSONObject("user")
+
+                        val nickname = userObj.getString("nick_name")
+
+                        runOnUiThread {
+                            Toast.makeText(mContext, "${nickname}님 환영합니다!", Toast.LENGTH_SHORT).show()
+                        }
+
                     }
                     else {
 
