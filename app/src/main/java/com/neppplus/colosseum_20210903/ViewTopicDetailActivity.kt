@@ -104,7 +104,6 @@ class ViewTopicDetailActivity : BaseActivity() {
 
                 mTopicData = TopicData.getTopicDataFromJson(topicObj)
 
-
 //                topicObj 안에를 보면, 댓글 목록도 같이 들어있다. => 추가 파싱, UI 반영
 
                 val repliesArr =  topicObj.getJSONArray("replies")
@@ -138,6 +137,26 @@ class ViewTopicDetailActivity : BaseActivity() {
 
             secondSideTitleTxt.text = mTopicData.sideList[1].title
             secondSideVoteCountTxt.text = "${mTopicData.sideList[1].voteCount}표"
+
+//            투표 여부에 따라 버튼들에 다른 문구 적용.
+            if (mTopicData.mySideId == -1) {
+                voteToFirstSideBtn.text = "투표하기"
+                voteToSecondSideBtn.text = "투표하기"
+            }
+            else {
+
+//                내 투표 진영 id가 첫째 진영의 id와 같은지?
+
+                if (mTopicData.mySideId ==  mTopicData.sideList[0].id) {
+                    voteToFirstSideBtn.text = "취소하기"
+                    voteToSecondSideBtn.text = "선택변경"
+                }
+                else {
+                    voteToFirstSideBtn.text = "선택변경"
+                    voteToSecondSideBtn.text = "취소하기"
+                }
+
+            }
 
 //            리스트뷰도 새로고침.
             mReplyAdapter.notifyDataSetChanged()

@@ -11,6 +11,8 @@ class TopicData(
 //    선택진영 목록을 담아줄 ArrayList
     val sideList = ArrayList<SideData>()
 
+//    내가 투표한 진영의 id가 뭔지?
+    var mySideId = 0  // Int가 들어올 예정
 
     companion object {
 
@@ -42,6 +44,10 @@ class TopicData(
                 topicData.sideList.add(  sideData  )
 
             }
+
+
+//            내가 선택한 진영의 id?
+            topicData.mySideId = json.getInt("my_side_id")
 
 
 //            최종 결과 선정
