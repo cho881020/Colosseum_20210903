@@ -14,6 +14,17 @@ abstract class BaseActivity : AppCompatActivity() {
 
         mContext = this
 
+//        모든화면의 onCreate에서 커스텀액션바 적용도 실행.
+//        액션바가 존재하는 화면에서만 실행.
+//        액션바가 존재할때만 -> 별개의 함수를 실행.
+
+        supportActionBar?.let {
+//            액션바가 null이 아닐때만 실행시켜줄 코드
+            setCustomActionBar()
+        }
+
+
+
     }
 
     abstract fun setupEvents()
