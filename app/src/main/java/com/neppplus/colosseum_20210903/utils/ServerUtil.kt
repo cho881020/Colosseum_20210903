@@ -214,6 +214,51 @@ class ServerUtil {
         }
 
 
+//        토론 상세 정보 (특정 주제에 대해서만) 가져오기
+
+        fun getRequestTopicDetail(context: Context, topicId:Int, handler: JsonResponseHandler?) {
+
+            val url = "${HOST_URL}/topic".toHttpUrlOrNull()!!.newBuilder()
+//            주소/3 등 어떤 데이터를 보고싶은지, /숫자  형태로 이어붙이는 주소 -> Path 라고 부름.
+//            주소?type=EMAIL  등  파라미터이름=값 형태로 이어붙이는 주소 -> Query 라고 부름.
+
+            url.addPathSegment(topicId.toString())
+
+//            url.addEncodedQueryParameter("type", type)
+//            url.addEncodedQueryParameter("value", value)
+
+            val urlString = url.toString()
+
+            Log.d("완성된URL", urlString)
+
+
+            val request = Request.Builder()
+                .url(urlString)
+                .get()
+                .header("X-Http-Token", ContextUtil.getToken(context))
+                .build()
+
+            val client = OkHttpClient()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val bodyString = response.body!!.string()
+                    val jsonObj = JSONObject(bodyString)
+                    Log.d("서버응답", jsonObj.toString())
+                    handler?.onResponse(jsonObj)
+                }
+
+            })
+
+
+        }
+
+
+
     }
 
 }
