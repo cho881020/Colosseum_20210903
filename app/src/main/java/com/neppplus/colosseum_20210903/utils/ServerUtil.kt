@@ -341,6 +341,47 @@ class ServerUtil {
 
         }
 
+//        좋아요 / 싫어요 찍기
+
+        fun postRequestReplyLikeOrHate(context: Context, replyId: Int, isLike: Boolean, handler : JsonResponseHandler? ) {
+
+            val urlString = "${HOST_URL}/topic_reply_like"
+
+            val formData = FormBody.Builder()
+                .add("reply_id", replyId.toString())
+                .add("is_like", isLike.toString())
+//                .add("password", pw)
+                .build()
+
+            val request = Request.Builder()
+                .url(urlString)
+                .post(formData)
+                .header("X-Http-Token", ContextUtil.getToken(context))
+                .build()
+
+            val client = OkHttpClient()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+
+
+                    val bodyString = response.body!!.string()
+                    val jsonObj = JSONObject(bodyString)
+                    Log.d("서버응답본문", jsonObj.toString())
+                    handler?.onResponse(jsonObj)
+
+
+
+                }
+
+            })
+
+        }
 
 
     }
