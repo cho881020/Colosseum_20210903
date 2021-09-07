@@ -13,6 +13,9 @@ class TopicData(
 
 //    내가 투표한 진영의 id가 뭔지?
     var mySideId = 0  // Int가 들어올 예정
+//    내가 투표한 진영 자체를 저장.
+//    투표한 진영이 없다면, null이 될 수 도 있다.
+    var mySelectedSide : SideData? = null
 
     companion object {
 
@@ -48,6 +51,15 @@ class TopicData(
 
 //            내가 선택한 진영의 id?
             topicData.mySideId = json.getInt("my_side_id")
+
+//            그 진영이 어떤건지? => null로 내려오면 파싱 X.
+            if (!json.isNull("my_side")) {
+
+//                null이 아닐때만 파싱.
+                topicData.mySelectedSide = SideData.getSideDataFromJson( json.getJSONObject("my_side") )
+
+            }
+
 
 
 //            최종 결과 선정

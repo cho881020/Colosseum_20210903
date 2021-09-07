@@ -1,5 +1,6 @@
 package com.neppplus.colosseum_20210903
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -27,6 +28,13 @@ class ViewTopicDetailActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        addReplyBtn.setOnClickListener {
+            val myIntent = Intent(mContext, EditReplyActivity::class.java)
+            myIntent.putExtra("selecteSide", mTopicData.mySelectedSide)
+            startActivity(myIntent)
+        }
+
 
 //        첫번째 진영, 두번째 진영 투표버튼의 이벤트.
 //        두개의 버튼이 하는일이 거의 동일함. => 코드를 한번만 짜서, 두개의 버튼에 똑같이 달아보자.
