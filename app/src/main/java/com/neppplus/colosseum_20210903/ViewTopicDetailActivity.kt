@@ -28,6 +28,15 @@ class ViewTopicDetailActivity : BaseActivity() {
         setValues()
     }
 
+//    화면에 들어올때마다 (onResume), 토론 현황 (+댓글) 새로 불러오기.
+
+    override fun onResume() {
+        super.onResume()
+
+        getTopicDetailDataFromServer()
+
+    }
+
     override fun setupEvents() {
 
         addReplyBtn.setOnClickListener {
@@ -123,6 +132,10 @@ class ViewTopicDetailActivity : BaseActivity() {
                 mTopicData = TopicData.getTopicDataFromJson(topicObj)
 
 //                topicObj 안에를 보면, 댓글 목록도 같이 들어있다. => 추가 파싱, UI 반영
+
+
+//                계속 댓글을 다시 불러옴. -> 기존의 댓글은 지워주고 (중복 막기) 다시 추가
+                mReplyList.clear()
 
                 val repliesArr =  topicObj.getJSONArray("replies")
 
