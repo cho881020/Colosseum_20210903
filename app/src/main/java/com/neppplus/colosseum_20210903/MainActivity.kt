@@ -68,10 +68,12 @@ class MainActivity : BaseActivity() {
                     val topicObj = topicsArr.getJSONObject(i)
 
 //                    TopicData를 만들어서 -> 멤버변수들에 -> topicObj에서 파싱한 데이터를 대입.
-                    val tempTopicData = TopicData()
-                    tempTopicData.id = topicObj.getInt("id")
-                    tempTopicData.title = topicObj.getString("title")
-                    tempTopicData.imageURL = topicObj.getString("img_url")
+//                    val tempTopicData = TopicData()
+//                    tempTopicData.id = topicObj.getInt("id")
+//                    tempTopicData.title = topicObj.getString("title")
+//                    tempTopicData.imageURL = topicObj.getString("img_url")
+
+                    val tempTopicData = TopicData.getTopicDataFromJson(topicObj)
 
 
 //                    mTopicList에 하나씩 추가. => 어댑터의 목록 구성 변수에 변화.
