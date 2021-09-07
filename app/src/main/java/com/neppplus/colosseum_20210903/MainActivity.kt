@@ -51,6 +51,9 @@ class MainActivity : BaseActivity() {
 
         backBtn.visibility = View.GONE
 
+//        알림버튼 보여주기 (메인만 따로 보여주기)
+        notiBtn.visibility = View.VISIBLE
+
     }
 
 //    서버에서, 메인화면에 보여줄 정보 받아오기
