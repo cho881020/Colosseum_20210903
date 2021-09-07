@@ -224,7 +224,7 @@ class ServerUtil {
 
             url.addPathSegment(topicId.toString())
 
-//            url.addEncodedQueryParameter("type", type)
+            url.addEncodedQueryParameter("order_type", "NEW")
 //            url.addEncodedQueryParameter("value", value)
 
             val urlString = url.toString()
