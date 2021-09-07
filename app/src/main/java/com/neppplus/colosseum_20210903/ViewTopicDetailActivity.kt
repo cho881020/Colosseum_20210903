@@ -2,6 +2,7 @@ package com.neppplus.colosseum_20210903
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.bumptech.glide.Glide
 import com.neppplus.colosseum_20210903.adapters.ReplyAdapter
 import com.neppplus.colosseum_20210903.datas.ReplyData
@@ -25,6 +26,25 @@ class ViewTopicDetailActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+//        첫번째 진영, 두번째 진영 투표버튼의 이벤트.
+//        두개의 버튼이 하는일이 거의 동일함. => 코드를 한번만 짜서, 두개의 버튼에 똑같이 달아보자.
+
+//        버튼이 눌리면 할 일 (OnClickListener) 을 적어두는 변수. (Interface 변수)
+        val ocl = object : View.OnClickListener {
+
+            override fun onClick(p0: View?) {
+
+//                버튼이 눌리면 할 일
+
+            }
+
+        }
+
+        voteToFirstSideBtn.setOnClickListener(ocl)
+        voteToSecondSideBtn.setOnClickListener(ocl)
+
+
 
     }
 
