@@ -41,7 +41,7 @@ class ViewTopicDetailActivity : BaseActivity() {
             }
 
             val myIntent = Intent(mContext, EditReplyActivity::class.java)
-            myIntent.putExtra("selecteSide", mTopicData.mySelectedSide)
+            myIntent.putExtra("selectedSide", mTopicData.mySelectedSide)
             startActivity(myIntent)
         }
 
