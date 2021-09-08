@@ -53,6 +53,38 @@ class ReplyAdapter(
 
         createdAtTxt.text  =  data.getFormattedTimeAgo()
 
+
+//        이 댓글은 내가 좋아요 / 싫어요 찍은 여부를 판단 할수 있다.
+//        data.myLike 등 변수를 활용.
+
+//        응용문제 1.
+//        내가 좋아요 한 댓글 -> 버튼 테두리 빨간 사각형.
+//        좋아요 안한 댓글 -> 버튼 테두리 검정 사각형.
+
+//        싫어요 : 내가 했다면 파란 사각형. 아니면 검정 사각형.
+
+
+//        응용문제 2. (구글링)
+//        위의 같은 상황에서 글씨 색상도, 빨간 or #DFDFDF 회색.
+//        싫어요 글씨 파란색 or #DFDFDF 회색.
+
+        if (data.myLike) {
+            likeCountTxt.setBackgroundResource(R.drawable.red_border_rect)
+        }
+        else {
+            likeCountTxt.setBackgroundResource(R.drawable.black_border_rect)
+        }
+
+
+        if (data.myHate) {
+            hateCountTxt.setBackgroundResource(R.drawable.blue_border_rect)
+        }
+        else {
+            hateCountTxt.setBackgroundResource(R.drawable.black_border_rect)
+        }
+
+
+
         likeCountTxt.tag = true
         hateCountTxt.tag = false
 
