@@ -36,8 +36,13 @@ class NotiAdapter(
 
 
         val notiTitleTxt = row.findViewById<TextView>(R.id.notiTitleTxt)
+        val createdAtTxt = row.findViewById<TextView>(R.id.createdAtTxt)
 
         notiTitleTxt.text = data.title
+
+//        Calendar -> String으로 가공 (SimpleDateFormat - format 활용)
+        val sdf = SimpleDateFormat("yyyy년 M월 d일 a h:mm")
+        createdAtTxt.text = sdf.format( data.createdAt.time )
 
         return row
     }
