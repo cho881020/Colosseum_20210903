@@ -24,6 +24,9 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         setupEvents()
         setValues()
+        
+//        브랜치 구별용 주석
+        
     }
 
     override fun setupEvents() {
