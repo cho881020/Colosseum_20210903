@@ -61,6 +61,40 @@ class MainActivity : BaseActivity() {
 
         notiLayout.visibility = View.VISIBLE
 
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+//        서버에서, 안 읽은 알림이 몇개인지 받아오자. => 화면에 들어올때마다 재 확인.
+
+        ServerUtil.getRequestNotificationCountOrList(mContext, false, object : ServerUtil.JsonResponseHandler {
+            override fun onResponse(jsonObj: JSONObject) {
+
+                val dataObj = jsonObj.getJSONObject("data")
+                val unreadCount = dataObj.getInt("unread_noty_count")
+
+//        알림 갯수 : 0개 -> 빨간 동그라미 숨김처리.
+//        1개 이상 -> 빨간 동그라미 보여주기 + 몇개인지 텍스트 설정.
+
+                runOnUiThread {
+                    if (unreadCount == 0) {
+                        notiCountTxt.visibility = View.GONE
+                    }
+                    else {
+                        notiCountTxt.text = unreadCount.toString()
+                        notiCountTxt.visibility = View.VISIBLE
+                    }
+                }
+
+
+            }
+
+        })
+
+
+
     }
 
 //    서버에서, 메인화면에 보여줄 정보 받아오기
