@@ -1,6 +1,7 @@
 package com.neppplus.colosseum_20210903
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -53,7 +54,11 @@ abstract class BaseActivity : AppCompatActivity() {
         }
 
         notiBtn.setOnClickListener {
-            Toast.makeText(mContext, "알림목록을 보러 갑니다.", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(mContext, "알림목록을 보러 갑니다.", Toast.LENGTH_SHORT).show()
+
+            val myIntent = Intent(mContext, NotificationListActivity::class.java)
+            startActivity(myIntent)
+
         }
 
 //        모든 화면은 기본적으로 노티버튼을 숨겨두자. => xml에서 visibility gone
