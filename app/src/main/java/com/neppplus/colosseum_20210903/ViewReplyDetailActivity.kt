@@ -1,7 +1,9 @@
 package com.neppplus.colosseum_20210903
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.neppplus.colosseum_20210903.datas.ReplyData
 import com.neppplus.colosseum_20210903.utils.ServerUtil
@@ -35,6 +37,10 @@ class ViewReplyDetailActivity : BaseActivity() {
 
                     runOnUiThread {
                         contentEdt.setText("")
+
+//                        도전 코드 (구글링) : 키보드 숨김처리
+                        val imm = mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                        imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
 
                     }
 
