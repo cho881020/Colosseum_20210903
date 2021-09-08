@@ -422,6 +422,51 @@ class ServerUtil {
 
         }
 
+
+//        어디까지는 읽은 알림인지, 서버에 알려주기.
+
+
+        fun postRequestNotificationRead(context: Context, notiId: Int, handler : JsonResponseHandler? ) {
+
+            val urlString = "${HOST_URL}/notification"
+
+            val formData = FormBody.Builder()
+                .add("noti_id", notiId.toString())
+//                .add("is_like", isLike.toString())
+//                .add("password", pw)
+                .build()
+
+            val request = Request.Builder()
+                .url(urlString)
+                .post(formData)
+                .header("X-Http-Token", ContextUtil.getToken(context))
+                .build()
+
+            val client = OkHttpClient()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+
+
+                    val bodyString = response.body!!.string()
+                    val jsonObj = JSONObject(bodyString)
+                    Log.d("서버응답본문", jsonObj.toString())
+                    handler?.onResponse(jsonObj)
+
+
+
+                }
+
+            })
+
+        }
+
+
     }
 
 }

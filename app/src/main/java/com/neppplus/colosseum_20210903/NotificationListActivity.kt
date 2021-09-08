@@ -56,6 +56,10 @@ class NotificationListActivity : BaseActivity() {
                     mNotiAdapter.notifyDataSetChanged()
                 }
 
+//                응용문제 답안.
+//                 알림 목록을 불러오면 -> 맨 위의 알림까지는 내가 읽었따고 서버에 전파.
+                ServerUtil.postRequestNotificationRead(mContext, mNotiList[0].id, null)
+
             }
 
         })
