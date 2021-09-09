@@ -57,6 +57,21 @@ class ViewReplyDetailActivity : BaseActivity() {
 
 //                해당 답글 삭제 -> API 요청 + 새로고침
 
+                ServerUtil.deleteRequestReply(mContext, clickedReply.id, object : ServerUtil.JsonResponseHandler {
+                    override fun onResponse(jsonObj: JSONObject) {
+
+                        runOnUiThread {
+                            Toast.makeText(mContext, "답글을 삭제 했습니다.", Toast.LENGTH_SHORT).show()
+                        }
+
+//                        답글 목록 새로 불러오기
+                        getChildRepliesFromServer()
+
+                    }
+
+                })
+
+
             })
             alert.setNegativeButton("취소", null)
             alert.show()
