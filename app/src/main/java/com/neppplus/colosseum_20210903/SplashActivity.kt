@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
+import com.neppplus.colosseum_20210903.datas.UserData
 import com.neppplus.colosseum_20210903.utils.ContextUtil
+import com.neppplus.colosseum_20210903.utils.ServerUtil
+import org.json.JSONObject
 
 class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,10 +40,30 @@ class SplashActivity : BaseActivity() {
 //            둘다 만족 : 자동로그인 O. -> 메인화면으로 이동.
                 myIntent = Intent(mContext, MainActivity::class.java)
 
+//                내가 누구인지 정보를 받아오자. => API 활용.
+//                어느 화면에서든 접근할 수 있게 세팅해주자.
+
+                ServerUtil.getRequestUserData(mContext, object : ServerUtil.JsonResponseHandler {
+                    override fun onResponse(jsonObj: JSONObject) {
+
+                        val dataObj = jsonObj.getJSONObject("data")
+                        val userObj = dataObj.getJSONObject("user")
+
+                        val loginUserData = UserData.getUserDataFromJson(userObj)
+
+                        Log.d("자동로그인", "로그인한 사람 닉네임 - ${loginUserData.nickname}")
+
+                    }
+
+                })
+
             }
             else {
 //            하나라도 만족 안됨 : 자동로그인 실패. -> 로그인 화면으로 이동.
                 myIntent = Intent(mContext, SignInActivity::class.java)
+
+//                내가 누구인지 받아오지 않겠다. (코드 작성 X)
+
             }
 
             startActivity(myIntent)
