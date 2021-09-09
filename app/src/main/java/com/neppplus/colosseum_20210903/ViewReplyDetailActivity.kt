@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import com.neppplus.colosseum_20210903.adapters.ChildReplyAdapter
 import com.neppplus.colosseum_20210903.datas.ReplyData
 import com.neppplus.colosseum_20210903.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_view_reply_detail.*
@@ -15,6 +16,8 @@ class ViewReplyDetailActivity : BaseActivity() {
     lateinit var mReplyData : ReplyData
 
     val mChildReplyList = ArrayList<ReplyData>()
+
+    lateinit var mChildReplyAdapter : ChildReplyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +67,10 @@ class ViewReplyDetailActivity : BaseActivity() {
 
 
         getChildRepliesFromServer()
+
+        mChildReplyAdapter = ChildReplyAdapter(mContext, R.layout.child_reply_list_item, mChildReplyList)
+        childReplyListView.adapter = mChildReplyAdapter
+
     }
 
     fun getChildRepliesFromServer() {
@@ -82,6 +89,10 @@ class ViewReplyDetailActivity : BaseActivity() {
 
                 }
 
+
+                runOnUiThread {
+                    mChildReplyAdapter.notifyDataSetChanged()
+                }
 
             }
 
