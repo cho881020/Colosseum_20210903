@@ -34,6 +34,14 @@ class ViewReplyDetailActivity : BaseActivity() {
 
         childReplyListView.setOnItemLongClickListener { adapterView, view, position, l ->
 
+//            vaildation => 내가 적은 답글이 아니라면, 함수 강제 종료.
+//            길게 누른 답글의 작성자가 => 나 인가?
+//            답글.작성자.id(Int)  ==  "로그인한사람".id(Int)
+
+//            if () {
+//                return@setOnItemLongClickListener true
+//            }
+
 //            경고창 -> 정말 해당 답글을 삭제하시겠습니까.?
 
             val alert = AlertDialog.Builder(mContext)
