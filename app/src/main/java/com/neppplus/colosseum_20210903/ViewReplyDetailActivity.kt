@@ -40,6 +40,9 @@ class ViewReplyDetailActivity : BaseActivity() {
             ServerUtil.postRequestChildReply(mContext, inputContent, mReplyData.id, object : ServerUtil.JsonResponseHandler {
                 override fun onResponse(jsonObj: JSONObject) {
 
+//                    답글 목록 다시 불러오기.
+                    getChildRepliesFromServer()
+
                     runOnUiThread {
                         contentEdt.setText("")
 
@@ -83,6 +86,9 @@ class ViewReplyDetailActivity : BaseActivity() {
 
                 val repliesArr = replyObj.getJSONArray("replies")
 
+//                똑같은 댓글이 여러번 쌓이는걸 방지.
+                mChildReplyList.clear()
+
                 for ( i  in  0 until repliesArr.length() ) {
 
                     mChildReplyList.add( ReplyData.getReplyDataFromJson( repliesArr.getJSONObject(i) ) )
@@ -92,6 +98,11 @@ class ViewReplyDetailActivity : BaseActivity() {
 
                 runOnUiThread {
                     mChildReplyAdapter.notifyDataSetChanged()
+
+//                    리스트뷰의 최 하단 (마지막 아이템)으로 이동.
+                    childReplyListView.smoothScrollToPosition(mChildReplyList.lastIndex)
+
+
                 }
 
             }
