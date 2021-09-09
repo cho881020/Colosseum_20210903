@@ -46,6 +46,30 @@ class ChildReplyAdapter(
         sideAndNicknameTxt.text = "(${data.selectedSide.title}) ${data.writer.nickname}"
 
 
+        likeCountTxt.text = "좋아요 ${data.likeCount}개"
+        hateCountTxt.text = "싫어요 ${data.hateCount}개"
+
+        if (data.myLike) {
+            likeCountTxt.setBackgroundResource(R.drawable.red_border_box)
+            likeCountTxt.setTextColor(mContext.resources.getColor(R.color.red))
+        }
+        else {
+
+            likeCountTxt.setBackgroundResource(R.drawable.black_border_rect)
+            likeCountTxt.setTextColor(mContext.resources.getColor(R.color.black))
+        }
+
+        if (data.myHate) {
+            hateCountTxt.setBackgroundResource(R.drawable.blue_border_box)
+            hateCountTxt.setTextColor(mContext.resources.getColor(R.color.blue))
+        }
+        else {
+
+            hateCountTxt.setBackgroundResource(R.drawable.black_border_rect)
+            hateCountTxt.setTextColor(mContext.resources.getColor(R.color.black))
+        }
+
+
         likeCountTxt.tag = true
         hateCountTxt.tag = false
 
