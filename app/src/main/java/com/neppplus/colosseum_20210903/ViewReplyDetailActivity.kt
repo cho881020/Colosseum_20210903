@@ -4,11 +4,13 @@ import android.content.Context
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.neppplus.colosseum_20210903.adapters.ChildReplyAdapter
 import com.neppplus.colosseum_20210903.datas.ReplyData
+import com.neppplus.colosseum_20210903.utils.GlobalData
 import com.neppplus.colosseum_20210903.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_view_reply_detail.*
 import org.json.JSONObject
@@ -38,9 +40,14 @@ class ViewReplyDetailActivity : BaseActivity() {
 //            길게 누른 답글의 작성자가 => 나 인가?
 //            답글.작성자.id(Int)  ==  "로그인한사람".id(Int)
 
-//            if () {
-//                return@setOnItemLongClickListener true
-//            }
+            Log.d("댓글상세-로그인한사람?", GlobalData.loginUser!!.nickname)
+
+            val clickedReply = mChildReplyList[position]
+
+            if (GlobalData.loginUser!!.id != clickedReply.writer.id) {
+                Toast.makeText(mContext, "자신이 적은 답글만 삭제할 수 있습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnItemLongClickListener true
+            }
 
 //            경고창 -> 정말 해당 답글을 삭제하시겠습니까.?
 
