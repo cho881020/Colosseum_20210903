@@ -63,8 +63,8 @@ class ViewReplyDetailActivity : BaseActivity() {
 
         sideAndNicknameTxt.text = "(${mReplyData.selectedSide.title}) ${mReplyData.writer.nickname}"
 
-        replyContentTxt.text = mReplyData.content
 
+        replyContentTxt.text = mReplyData.content
 
         getChildRepliesFromServer()
 
