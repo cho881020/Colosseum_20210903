@@ -40,6 +40,8 @@ class MainActivity : BaseActivity() {
             val myIntent = Intent(mContext, ViewTopicDetailActivity::class.java)
             myIntent.putExtra("topic", clickedTopic)
             startActivity(myIntent)
+            
+//            구분용 주석
 
         }
 
