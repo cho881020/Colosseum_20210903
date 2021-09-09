@@ -37,10 +37,37 @@ class ChildReplyAdapter(
 
         val sideAndNicknameTxt = row.findViewById<TextView>(R.id.sideAndNicknameTxt)
         val contentTxt = row.findViewById<TextView>(R.id.contentTxt)
+        val likeCountTxt = row.findViewById<TextView>(R.id.likeCountTxt)
+        val hateCountTxt = row.findViewById<TextView>(R.id.hateCountTxt)
+
 
         contentTxt.text = data.content
 
         sideAndNicknameTxt.text = "(${data.selectedSide.title}) ${data.writer.nickname}"
+
+
+        likeCountTxt.tag = true
+        hateCountTxt.tag = false
+
+        val ocl =  object :  View.OnClickListener {
+            override fun onClick(view: View?) {
+
+                val isLike = view!!.tag.toString().toBoolean()
+                ServerUtil.postRequestReplyLikeOrHate(mContext, data.id, isLike, object : ServerUtil.JsonResponseHandler {
+                    override fun onResponse(jsonObj: JSONObject) {
+
+                        (mContext as ViewReplyDetailActivity).getChildRepliesFromServer()
+
+                    }
+
+                })
+
+            }
+
+        }
+
+        likeCountTxt.setOnClickListener(ocl)
+        hateCountTxt.setOnClickListener(ocl)
 
         return row
     }
